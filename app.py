@@ -9,10 +9,10 @@ st.title("Hlasovanie a popularita strán")
 # TU PREPÍŠTE ODKAZY ZA VAŠE VLASTNÉ
 # =========================================================================
 # 1. Odkaz na vašu hlavnú Google Tabuľku (zo zložky so šípkou na webe)
-GOOGLE_SHEET_URL = "https://google.com"
+GOOGLE_SHEET_URL = "https://docs.google.com/spreadsheets/d/1tnZuvYAq47pbBpfAax0TfjGPSoCplkAXZmPD_GyjOTI/edit?usp=sharing"
 
 # 2. Odkaz na váš zverejnený Google Formulár (zo sekcie Odoslať -> ikona reťaze)
-ODKAZ_NA_FORMULAR = "https://google.com"
+ODKAZ_NA_FORMULAR = "https://docs.google.com/forms/d/e/1FAIpQLSdFRKTTneLhn0KpOZI-TJPyWR-6Qj5FWXjcImFznMErBtgHbg/viewform?usp=header"
 # =========================================================================
 
 # 2. Funkcia na bezpečné načítanie dát bez citlivosti na názvy stĺpcov
