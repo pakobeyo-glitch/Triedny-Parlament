@@ -62,19 +62,30 @@ if not df_db.empty:
 
     # --- ROLA: SPRÁVCA (Zabezpečená sekcia pod heslom) ---
     st.divider()
-    st.sidebar.header("Sekcia pre správcu")
+    st.sidebar.header("🔐 Sekcia pre správcu")
     heslo = st.sidebar.text_input("Zadajte administrátorské heslo", type="password")
 
     if heslo == "admin123":
         st.sidebar.success("Prístup povolený!")
-        st.subheader("Administrácia a správa dát")
-        st.info("Ako správca môžete upravovať zoznam strán alebo priamo mazať testovacie hlasy vo vašej Google Tabuľke.")
+        st.subheader("🛠️ Administrácia a správa dát")
         
-        # Rýchly odkaz pre správcu na úpravu zdrojovej tabuľky
-        st.markdown(f"[Otvoriť Google Tabuľku na manuálnu úpravu dát]({GOOGLE_SHEET_URL})")
+        # 1. Odkaz na manuálnu úpravu tabuľky
+        st.markdown(f"[👉 Otvoriť Google Tabuľku na úpravu dát]({GOOGLE_SHEET_URL})")
+        
+        st.divider()
+        st.subheader("🔄 Vyresetovanie všetkých hlasov")
+        st.warning("⚠️ Pozor: Ak chcete vymazať doterajšie hlasy a spustiť hlasovanie nanovo, postupujte takto:")
+        
+        st.write("1. Otvorte editor vášho Google Formulára.")
+        st.write("2. Prejdite na kartu **Odpovede** (Responses).")
+        st.write("3. Kliknite na **tri bodky** vpravo hore a vyberte **Odstrániť všetky odpovede** (Delete all responses).")
+        st.write("4. Tým sa tabuľka vyprázdni a graf sa automaticky vynuluje.")
+        
+        # Vytiahnutie odkazu na editáciu formulára (z viewform urobíme edit)
+        odkaz_na_editaciu_formulara = ODKAZ_NA_FORMULAR.replace("/viewform", "/edit")
+        
+        # Rýchle tlačidlo pre správcu na prechod do editácie formulára
+        st.link_button("🗑️ PREJSŤ NA VYMAZANIE HLASOV VO FORMULÁRI", odkaz_na_editaciu_formulara, type="secondary", use_container_width=True)
                 
     elif heslo != "":
         st.sidebar.error("Nesprávne heslo!")
-else:
-    st.warning("Systém čaká na správne prepojenie s databázou. Skontrolujte URL adresu tabuľky a jej práva na zdieľanie.")
-
