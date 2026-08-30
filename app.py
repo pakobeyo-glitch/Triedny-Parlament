@@ -7,7 +7,7 @@ st.set_page_config(page_title="Parlamentné hlasovanie", layout="wide")
 st.title("📊 Hlasovanie a popularita strán")
 
 # Odkaz na vašu Google Tabuľku (SEM VLOŽTE VÁŠ LINK)
-GOOGLE_SHEET_URL = "https://google.com"
+GOOGLE_SHEET_URL = "https://docs.google.com/spreadsheets/d/1tnZuvYAq47pbBpfAax0TfjGPSoCplkAXZmPD_GyjOTI/edit?usp=sharing"
 
 # Vygenerovanie unikátneho ID pre tento prehliadač (simulácia jedného hlasu)
 if "user_id" not in st.session_state:
