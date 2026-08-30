@@ -15,25 +15,29 @@ GOOGLE_SHEET_URL = "https://docs.google.com/spreadsheets/d/1tnZuvYAq47pbBpfAax0T
 ODKAZ_NA_FORMULAR = "https://docs.google.com/forms/d/e/1FAIpQLSdFRKTTneLhn0KpOZI-TJPyWR-6Qj5FWXjcImFznMErBtgHbg/viewform?usp=header"
 # =========================================================================
 
-# 2. Funkcia na bezpečné načítanie dát bez citlivosti na názvy stĺpcov
+# 2. Funkcia na bezpečné načítanie dát
 def nacitat_data_z_sheets():
     try:
-        # Vytiahneme čisté ID tabuľky pre priamy export do CSV
-        sheet_id = GOOGLE_SHEET_URL.split("/d/")[1].split("/")[0]
-        csv_url_strany = f"https://google.com{sheet_id}/export?format=csv&gid=0"
+        # Ak odkaz obsahuje koncovku /edit alebo parametre, zmeníme ju priamo na CSV export
+        url_cista = GOOGLE_SHEET_URL.split("?")[0].split("#")[0]
+        if url_cista.endswith("/edit"):
+            csv_url_strany = url_cista.replace("/edit", "/export?format=csv&gid=0")
+        elif url_cista.endswith("/"):
+            csv_url_strany = url_cista + "export?format=csv&gid=0"
+        else:
+            csv_url_strany = url_cista + "/export?format=csv&gid=0"
         
         # Načítanie dát cez Pandas
         df = pd.read_csv(csv_url_strany)
         
-        # Automatické premenovanie stĺpcov podľa poradia (1. stĺpec = Strana, 2. stĺpec = Hlasy)
+        # Automatické premenovanie stĺpcov podľa poradia
         df.columns = ["Strana", "Hlasy"] + list(df.columns[2:])
         df["Hlasy"] = pd.to_numeric(df["Hlasy"], errors='coerce').fillna(0)
         return df
     except Exception as e:
         st.error(f"Chyba pri načítaní dát z Google Tabuľky: {e}")
-        return pd.DataFrame()
-
-# Spustenie načítania dát
+        return pd.DataFrame()# Spustenie načítania dát
+        
 df_db = nacitat_data_z_sheets()
 
 if not df_db.empty:
