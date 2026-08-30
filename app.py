@@ -4,7 +4,7 @@ import uuid
 
 # 1. Nastavenie stránky
 st.set_page_config(page_title="Parlamentné hlasovanie", layout="wide")
-st.title("📊 Hlasovanie a popularita strán")
+st.title("Hlasovanie a popularita strán")
 
 # Odkaz na vašu Google Tabuľku (SEM VLOŽTE VÁŠ LINK)
 GOOGLE_SHEET_URL = "https://docs.google.com/spreadsheets/d/1tnZuvYAq47pbBpfAax0TfjGPSoCplkAXZmPD_GyjOTI/edit?usp=sharing"
@@ -45,7 +45,7 @@ if not df_db.empty:
 
     # --- ROLA: VOLIČ ---
     st.divider()
-    st.subheader("📥 Odovzdanie vášho hlasu")
+    st.subheader("Odovzdanie vášho hlasu")
 
     if st.session_state.uz_hlasoval:
         st.success("✅ Ďakujeme! Váš hlas už bol úspešne zaznamenaný. Môžete hlasovať iba raz.")
