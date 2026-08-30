@@ -6,7 +6,7 @@ st.set_page_config(page_title="Prieskum popularity strán", layout="wide")
 st.title("📊 Aktuálna popularita parlamentných strán")
 
 # Odkaz na vašu Google Tabuľku (SEM VLOŽTE VÁŠ LINK)
-GOOGLE_SHEET_URL = "https://docs.google.com/spreadsheets/d/1E8fjaI4o1NkrYJY9VLi-KhYF9-0L9ixwpwPLnQW4-Wo/edit?usp=sharing"
+GOOGLE_SHEET_URL = "https://docs.google.com/spreadsheets/d/1tnZuvYAq47pbBpfAax0TfjGPSoCplkAXZmPD_GyjOTI/edit?usp=sharing"
 
 # Funkcia na načítanie dát s vypnutou cache pre okamžité zmeny
 def nacitat_data_z_sheets():
