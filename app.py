@@ -9,7 +9,7 @@ st.set_page_config(page_title="Prieskum popularity strán", layout="wide")
 st.title("📊 Aktuálna popularita parlamentných strán")
 
 # Odkaz na vašu Google Tabuľku (sem vložte ten váš skopírovaný link)
-https://docs.google.com/spreadsheets/d/1E8fjaI4o1NkrYJY9VLi-KhYF9-0L9ixwpwPLnQW4-Wo/edit?usp=sharing = "https://google.com"
+GOOGLE_SHEET_URL = "https://docs.google.com/spreadsheets/d/1E8fjaI4o1NkrYJY9VLi-KhYF9-0L9ixwpwPLnQW4-Wo/edit?usp=sharing"
 
 # Funkcia na pripojenie a načítanie dát
 # Streamlit potrebuje prístup cez zdieľaný odkaz alebo servisný účet
