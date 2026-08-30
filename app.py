@@ -6,7 +6,7 @@ from google.oauth2.service_account import Credentials
 
 # 1. Nastavenie stránky
 st.set_page_config(page_title="Prieskum popularity strán", layout="wide")
-st.title("📊 Aktuálna popularita parlamentných strán")
+st.title("Aktuálna popularita triednych strán")
 
 # Odkaz na vašu Google Tabuľku (sem vložte ten váš skopírovaný link)
 GOOGLE_SHEET_URL = "https://docs.google.com/spreadsheets/d/1E8fjaI4o1NkrYJY9VLi-KhYF9-0L9ixwpwPLnQW4-Wo/edit?usp=sharing"
