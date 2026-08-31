@@ -87,7 +87,7 @@ if st.session_state.klikol_pokracovat == False:
         st.markdown("<div style='margin-bottom: 10px;'></div>", unsafe_allow_html=True)
         
         # Nová textová scéna (Scéna 3)
-        St.button("PRAVIDLÁ", type="secondary", use_container_width=True, on_click=preklop_na_info)
+        st.button("PRAVIDLÁ", type="secondary", use_container_width=True, on_click=preklop_na_info)
 
 # =========================================================================
 # SEKCIA 2: HLAVNÁ OBRAZOVKA (Graf, hlasovanie, správca)
