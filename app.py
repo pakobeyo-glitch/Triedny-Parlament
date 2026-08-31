@@ -21,10 +21,10 @@ def preklop_na_info():
 # ZÁKLADNÉ PREDVOLENÉ ODKAZY
 # =========================================================================
 if "google_sheet_url" not in st.session_state:
-    st.session_state.google_sheet_url = "https://google.com"
+    st.session_state.google_sheet_url = "https://docs.google.com/spreadsheets/d/1tnZuvYAq47pbBpfAax0TfjGPSoCplkAXZmPD_GyjOTI/edit?usp=sharing"
 
 if "odkaz_na_formular" not in st.session_state:
-    st.session_state.odkaz_na_formular = "https://google.com"
+    st.session_state.odkaz_na_formular = "https://docs.google.com/forms/d/e/1FAIpQLSdFRKTTneLhn0KpOZI-TJPyWR-6Qj5FWXjcImFznMErBtgHbg/viewform?usp=header"
 
 if "hlasovanie_povolene" not in st.session_state:
     st.session_state.hlasovanie_povolene = True
@@ -56,7 +56,7 @@ if st.session_state.cislo_sceny == 1:
     
     with col2:
         st.markdown("<br><br>", unsafe_allow_html=True)
-        URL_LOGA = "https://freepik.com"
+        URL_LOGA = "https://pbs.twimg.com/profile_images/2155836604/logo_mudronka_400x400.jpg"
         
         st.markdown(
             f"""
