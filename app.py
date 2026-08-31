@@ -12,6 +12,14 @@ if "google_sheet_url" not in st.session_state:
 
 if "odkaz_na_formular" not in st.session_state:
     st.session_state.odkaz_na_formular = "https://docs.google.com/forms/d/e/1FAIpQLSdFRKTTneLhn0KpOZI-TJPyWR-6Qj5FWXjcImFznMErBtgHbg/viewform?usp=header"
+
+if "hlasovanie_povolene" not in st.session_state:
+    st.session_state.hlasovanie_povolene = True
+
+# Pamäť pre číslo scény (1 = Úvod, 2 = Grafy/Hlasovanie, 3 = Informácie)
+if "cislo_sceny" not in st.session_state:
+    st.session_state.cislo_sceny = 1
+    
 # =========================================================================
 
 # Inicializácia stavu úvodnej obrazovky
@@ -63,15 +71,27 @@ if st.session_state.klikol_pokracovat == False:
             unsafe_allow_html=True
         )
         
-        # Tlačidlo (Streamlit ho v stĺpci automaticky roztiahne na plnú šírku stĺpca)
-        if st.button("POKRAČOVAŤ", type="primary", use_container_width=True):
-            st.session_state.klikol_pokracovat = True
+        # Grafy a Hlasovanie (Scéna 2)
+        if st.button("POKRAČOVAŤ NA HLASOVANIE" type="primary", use_container_width=True):
+            st.session_state.cislo_sceny = 2
+            st.rerun()
+            
+        st.markdown("<div style='margin-bottom: 10px;'></div>", unsafe_allow_html=True)
+        
+        # Nová textová scéna (Scéna 3)
+        if st.button("BÁSEŇ", type="secondary", use_container_width=True):
+            st.session_state.cislo_sceny = 3
             st.rerun()
 
 # =========================================================================
 # SEKCIA 2: HLAVNÁ OBRAZOVKA (Graf, hlasovanie, správca)
 # =========================================================================
-else:
+elif st.session_state.cislo_sceny == 2:
+    # Tlačidlo späť v bočnom menu pre Scénu 2
+    if st.sidebar.button("🏠 Späť na úvod", use_container_width=True):
+        st.session_state.cislo_sceny = 1
+        st.rerun()
+
     st.title("Hlasovanie a popularita strán")
     
     df_db = nacitat_data_z_sheets()
@@ -158,3 +178,25 @@ else:
                 
     elif heslo != "":
         st.sidebar.error("Nesprávne heslo!")
+
+# =========================================================================
+# SCÉNA 3: ČISTÁ TEXTOVÁ OBRAZOVKA (Informácie)
+# =========================================================================
+elif st.session_state.cislo_sceny == 3:
+    # TLAČIDLO V BOČNOM MENU
+    if st.sidebar.button("Späť na úvod", use_container_width=True):
+        st.session_state.cislo_sceny = 1
+        st.rerun()
+        
+    col1, col2, col3 = st.columns(3)
+    
+    with col2:
+        st.markdown("<br><br>", unsafe_allow_html=True)
+        st.markdown("<h1 style='text-align: center;'>Pravidlá a informácie</h1>", unsafe_allow_html=True)
+        
+        # --- SEM SI MÔŽETE NAPÍSAŤ SVOJ ČISTÝ TEXT ---
+        st.write("Tu sú základné informácie o našom parlamentnom prieskume:")
+        st.write("1. Každý žiak má právo odovzdať **iba jeden platný hlas**.")
+        st.write("2. Hlasovanie prebieha anonymne prostredníctvom priloženého Google formulára.")
+        st.write("3. Výsledky sa aktualizujú naživo každých pár minút po odoslaní formulára.")
+        st.info("Pred hlasovaním si poriadne premyslite svoju voľbu. Hlas nie je možné vziať späť.")
