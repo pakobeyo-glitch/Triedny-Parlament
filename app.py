@@ -96,7 +96,7 @@ else:
         st.error("Hlasovanie bolo správcom ukončené. Nové hlasy už nie je možné odovzdať.")
         
     st.divider()
-    st.write("Pri problémoch sa prosím obráťte na mňa, alebo mi napíšte na email chlebus1@gmail.com")
+    st.write("Pri problémoch sa prosím obráťte na mňa, alebo mi napíšte na email chlebus1@mudronka.sk")
     
     # Sekcia pre správcu v bočnom paneli
     st.sidebar.header("Sekcia pre správcu")
