@@ -88,7 +88,7 @@ if st.session_state.klikol_pokracovat == False:
 # =========================================================================
 elif st.session_state.cislo_sceny == 2:
     # Tlačidlo späť v bočnom menu pre Scénu 2
-    if st.sidebar.button("🏠 Späť na úvod", use_container_width=True):
+    if st.sidebar.button("Späť na úvod", use_container_width=True):
         st.session_state.cislo_sceny = 1
         st.rerun()
 
