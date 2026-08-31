@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd
 
 # 1. Nastavenie vzhľadu stránky
-st.set_page_config(page_title="Parlamentné hlasovanie", layout="wide")
+st.set_page_config(page_title="Hlasovanie", layout="wide")
 
 # =========================================================================
 # TU PREPÍŠEM ODKAZY ZA VAŠE VLASTNÉ
