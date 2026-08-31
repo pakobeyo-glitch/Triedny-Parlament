@@ -10,13 +10,13 @@ st.set_page_config(page_title="Parlamentné hlasovanie", layout="wide")
 # POZOR: Do GOOGLE_CSV_URL nevkladajte klasický odkaz, ale presne tento tvar, 
 # kde namiesto "KOD_VASEJ_TABULKY" vložíte ten dlhý kód z adresy vašej tabuľky.
 # Príklad: https://google.com
-GOOGLE_CSV_URL = "https://google.com"
+GOOGLE_CSV_URL = "https://docs.google.com/spreadsheets/d/1tnZuvYAq47pbBpfAax0TfjGPSoCplkAXZmPD_GyjOTI/edit?usp=sharing"
 
 # Odkaz na váš Google Formulár (klasický odkaz na hlasovanie)
-ODKAZ_NA_FORMULAR = "https://google.com"
+ODKAZ_NA_FORMULAR = "https://docs.google.com/forms/d/e/1FAIpQLSdFRKTTneLhn0KpOZI-TJPyWR-6Qj5FWXjcImFznMErBtgHbg/viewform?usp=header"
 
 # Odkaz na úpravu tabuľky pre správcu (tu môžete dať klasický odkaz z prehliadača)
-ODKAZ_PRE_SPRAVCU = "https://google.com"
+ODKAZ_PRE_SPRAVCU = "https://docs.google.com/spreadsheets/d/1tnZuvYAq47pbBpfAax0TfjGPSoCplkAXZmPD_GyjOTI/edit?gid=0#gid=0"
 # =========================================================================
 
 # Inicializácia stavu úvodnej obrazovky
