@@ -44,7 +44,7 @@ if not st.session_state.klikol_pokracovat:
     with stred:
         st.markdown("<br><br>", unsafe_allow_html=True)
         st.title("Volíme")
-        st.subheader("Vitajte na stránke na prieskum popularity strán")
+        st.subheader("Vitajte na stránke na prieskum popularity období")
         st.write("Táto aplikácia slúži na sledovanie priebežných výsledkov a bezpečné odovzdávanie hlasov voličov.")
         
         st.markdown("<br>", unsafe_allow_html=True)
