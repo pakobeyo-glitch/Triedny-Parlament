@@ -71,7 +71,7 @@ else:
         st.bar_chart(df_db.set_index("Strana")["Percentá (%)"])
         
         # 2. Koláčový graf
-        st.write("Podielový (koláčový) prehľad:")
+        st.write("Koláčový prehľad:")
         import plotly.express as px
         fig = px.pie(df_db, values='Percentá (%)', names='Strana', 
                      color_discrete_sequence=px.colors.sequential.RdBu)
