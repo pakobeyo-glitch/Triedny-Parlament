@@ -101,8 +101,8 @@ else:
     # Sekcia pre správcu v bočnom paneli
     st.sidebar.header("Sekcia pre správcu")
     heslo = st.sidebar.text_input("Zadajte administrátorské heslo", type="password")
-    st.divider
-    st.write("Ďakujem za pomoc Hugovi R.")
+    st.sidebar.divider()
+    st.sidebar.write("Ďakujem za pomoc Hugovi R.")
 
     if heslo == "admin123" or "ucitel26":
         st.sidebar.success("Prístup povolený!")
