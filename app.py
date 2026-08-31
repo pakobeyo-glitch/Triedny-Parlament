@@ -80,6 +80,8 @@ else:
     st.subheader("Odovzdanie vášho hlasu")
     st.write("Hlasovanie je zabezpečené cez systém Google Forms.")
     st.link_button("KLIKNI SEM A ODOVZDAJ SVOJ HLAS", st.session_state.odkaz_na_formular, type="primary", use_container_width=True)
+    st.divider()
+    st.subheader("Pri komplikáciach sa obráťte na email: chlebus1@mudronka.sk")
 
     # Sekcia pre správcu v bočnom paneli
     st.sidebar.header("Sekcia pre správcu")
@@ -105,8 +107,6 @@ else:
         st.markdown(f"[Otvoriť aktívnu Google Tabuľku]({st.session_state.google_sheet_url})")
         odkaz_na_editaciu = st.session_state.odkaz_na_formular.replace("/viewform", "/edit")
         st.link_button("PREJSŤ NA VYMAZANIE HLASOV", odkaz_na_editaciu, type="secondary", use_container_width=True)
-        st.divider()
-        st.subheader("Pri komplikáciach sa obráťte na email: chlebus1@mudronka.sk")
         
         if st.sidebar.button("Zobraziť úvodnú obrazovku"):
             st.session_state.klikol_pokracovat = False
