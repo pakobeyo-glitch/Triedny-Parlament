@@ -35,7 +35,7 @@ def nacitat_data_z_sheets():
 # SCÉNA 1: ÚVODNÁ OBRAZOVKA
 # =========================================================================
 if st.session_state.klikol_pokracovat == False:
-    col1, col2, col3 = st.columns()
+    col1, col2, col3 = st.columns(3)
     with col2:
         st.markdown("<br><br>", unsafe_allow_html=True)
         st.markdown("<h1 style='text-align: center;'>🏛️ Školský parlament</h1>", unsafe_allow_html=True)
