@@ -44,7 +44,7 @@ if st.session_state.klikol_pokracovat == False:
         st.markdown("<br><br>", unsafe_allow_html=True)
         st.markdown("<h1 style='text-align: center;'>Volby</h1>", unsafe_allow_html=True)
         st.markdown("<h3 style='text-align: center;'>Prieskum popularity strán a hlasovanie</h3>", unsafe_allow_html=True)
-        st.write("Vítame vás v aplikácii. Tu môžete sledovať priebežné výsledky volieb v reálnom čase.")
+        st.write("Vítame vás v aplikácii. Tu môžete sledovať priebežné výsledky volieb.")
         
         st.markdown("<br>", unsafe_allow_html=True)
         if st.button("POKRAČOVAŤ", type="primary", use_container_width=True):
