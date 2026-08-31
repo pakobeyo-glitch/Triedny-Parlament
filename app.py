@@ -5,7 +5,7 @@ import pandas as pd
 st.set_page_config(page_title="Parlamentné hlasovanie", layout="wide")
 
 # =========================================================================
-# TU PREPÍŠTE ODKAZY ZA VAŠE VLASTNÉ (Presne tak, ako ich máte vo funkčnej verzii)
+# TU PREPÍŠEM ODKAZY ZA VAŠE VLASTNÉ
 # =========================================================================
 GOOGLE_SHEET_URL = "https://docs.google.com/spreadsheets/d/1tnZuvYAq47pbBpfAax0TfjGPSoCplkAXZmPD_GyjOTI/edit?usp=sharing"
 ODKAZ_NA_FORMULAR = "https://docs.google.com/forms/d/e/1FAIpQLSdFRKTTneLhn0KpOZI-TJPyWR-6Qj5FWXjcImFznMErBtgHbg/viewform?usp=header"
@@ -39,7 +39,7 @@ if st.session_state.klikol_pokracovat == False:
         st.markdown("<br><br>", unsafe_allow_html=True)
         st.markdown("<h1 style='text-align: center;'>Volby</h1>", unsafe_allow_html=True)
         st.markdown("<h3 style='text-align: center;'>Prieskum popularity období a hlasovanie</h3>", unsafe_allow_html=True)
-        st.write("Vítame vás v aplikácii. Tu môžete sledovať priebežné výsledky volieb v reálnom čase a bezpečne odovzdať svoj hlas.")
+        st.write("Vítame vás v aplikácii. Tu môžete sledovať priebežné výsledky volieb a bezpečne odovzdať svoj hlas.")
         
         st.markdown("<br>", unsafe_allow_html=True)
         
