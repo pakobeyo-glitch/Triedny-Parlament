@@ -18,6 +18,10 @@ if "odkaz_na_formular" not in st.session_state:
 if "klikol_pokracovat" not in st.session_state:
     st.session_state.klikol_pokracovat = False
 
+# Inicializácia stavu hlasovania (Predvolene zapnuté)
+if "hlasovanie_povolene" not in st.session_state:
+    st.session_state.hlasovanie_povolene = True
+
 # Funkcia na bezpečné načítanie dát
 def nacitat_data_z_sheets():
     try:
@@ -76,13 +80,18 @@ else:
         # Pôvodná tabuľka s podrobnosťami
         st.dataframe(df_db[["Strana", "Hlasy", "Percentá (%)"]], use_container_width=True, hide_index=True)
 
+    # --- ROLA: VOLIČ ---
     st.divider()
     st.subheader("Odovzdanie vášho hlasu")
-    st.write("Hlasovanie je zabezpečené cez systém Google Forms.")
-    st.link_button("KLIKNI SEM A ODOVZDAJ SVOJ HLAS", st.session_state.odkaz_na_formular, type="primary", use_container_width=True)
-    st.divider()
-    st.write("Pri komplikáciach sa obráťte na email chlebus1@mudronka.sk, alebo na mňa osobne.")
-
+    
+    # Kód skontroluje, či správca hlasovanie nevypol
+    if st.session_state.hlasovanie_povolene:
+        st.write("Hlasovanie je zabezpečené cez systém Google Forms.")
+        st.link_button("KLIKNI SEM A ODOVZDAJ SVOJ HLAS", st.session_state.odkaz_na_formular, type="primary", use_container_width=True)
+    else:
+        # Ak je vypnuté, tlačidlo zmizne a ukáže sa toto:
+        st.error("Hlasovanie bolo správcom ukončené. Nové hlasy už nie je možné odovzdať.")
+        
     # Sekcia pre správcu v bočnom paneli
     st.sidebar.header("Sekcia pre správcu")
     heslo = st.sidebar.text_input("Zadajte administrátorské heslo", type="password")
