@@ -15,7 +15,7 @@ ODKAZ_NA_FORMULAR = "https://docs.google.com/forms/d/e/1FAIpQLSdFRKTTneLhn0KpOZI
 if "klikol_pokracovat" not in st.session_state:
     st.session_state.klikol_pokracovat = False
 
-# Funkcia na načítanie dát – presne tá, ktorá vám doteraz fungovala
+# Funkcia na načítanie dát
 def nacitat_data_z_sheets():
     try:
         base_url = GOOGLE_SHEET_URL.split("/edit")
