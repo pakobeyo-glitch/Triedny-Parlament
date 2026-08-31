@@ -106,6 +106,7 @@ else:
 
     if heslo == "admin123" or "ucitel26":
         st.sidebar.success("Prístup povolený!")
+        st.divider()
         st.subheader("Administrácia a zmena zdrojov")
         
         # Vstupné polia pre správcu
