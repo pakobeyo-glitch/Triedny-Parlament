@@ -36,7 +36,7 @@ def nacitat_data_z_sheets():
         return pd.DataFrame()
 
 # =========================================================================
-# SCÉNA 1: ÚVODNÁ OBRAZOVKA
+# SEKCIA 1: ÚVODNÁ OBRAZOVKA
 # =========================================================================
 if st.session_state.klikol_pokracovat == False:
     col1, col2, col3 = st.columns(3)
@@ -52,7 +52,7 @@ if st.session_state.klikol_pokracovat == False:
             st.rerun()
 
 # =========================================================================
-# SCÉNA 2: HLAVNÁ OBRAZOVKA (Graf, hlasovanie, správca)
+# SEKCIA 2: HLAVNÁ OBRAZOVKA (Graf, hlasovanie, správca)
 # =========================================================================
 else:
     st.title("Hlasovanie a popularita strán")
@@ -80,6 +80,9 @@ else:
         # Pôvodná tabuľka s podrobnosťami
         st.dataframe(df_db[["Strana", "Hlasy", "Percentá (%)"]], use_container_width=True, hide_index=True)
 
+# =========================================================================
+# SEKCIA 3: ROLE
+# =========================================================================
     # --- ROLA: VOLIČ ---
     st.divider()
     st.subheader("Odovzdanie vášho hlasu")
@@ -92,9 +95,14 @@ else:
         # Ak je vypnuté, tlačidlo zmizne a ukáže sa toto:
         st.error("Hlasovanie bolo správcom ukončené. Nové hlasy už nie je možné odovzdať.")
         
+    st.divider()
+    st.write("Pri problémoch sa prosím obráťte na mňa.")
+    
     # Sekcia pre správcu v bočnom paneli
     st.sidebar.header("Sekcia pre správcu")
     heslo = st.sidebar.text_input("Zadajte administrátorské heslo", type="password")
+    st.divider
+    st.write("Ďakujem za pomoc Hugovi R.")
 
     if heslo == "admin123" or "ucitel26":
         st.sidebar.success("Prístup povolený!")
