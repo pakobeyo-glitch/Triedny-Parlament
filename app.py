@@ -16,7 +16,7 @@ GOOGLE_CSV_URL = "https://docs.google.com/spreadsheets/d/1tnZuvYAq47pbBpfAax0Tfj
 ODKAZ_NA_FORMULAR = "https://docs.google.com/forms/d/e/1FAIpQLSdFRKTTneLhn0KpOZI-TJPyWR-6Qj5FWXjcImFznMErBtgHbg/viewform?usp=header"
 
 # Odkaz na úpravu tabuľky pre správcu (tu môžete dať klasický odkaz z prehliadača)
-ODKAZ_PRE_SPRAVCU = "https://docs.google.com/spreadsheets/d/1tnZuvYAq47pbBpfAax0TfjGPSoCplkAXZmPD_GyjOTI/edit?gid=0#gid=0"
+ODKAZ_PRE_SPRAVCU = "https://docs.google.com/spreadsheets/d/1tnZuvYAq47pbBpfAax0TfjGPSoCplkAXZmPD_GyjOTI/edit?usp=sharing"
 # =========================================================================
 
 # Inicializácia stavu úvodnej obrazovky
