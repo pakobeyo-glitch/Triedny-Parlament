@@ -180,7 +180,7 @@ elif st.session_state.cislo_sceny == 2:
         st.sidebar.error("Nesprávne heslo!")
 
 # =========================================================================
-# SCÉNA 3: ČISTÁ TEXTOVÁ OBRAZOVKA (Informácie)
+# SCÉNA 4: ČISTÁ TEXTOVÁ OBRAZOVKA (Informácie)
 # =========================================================================
 elif st.session_state.cislo_sceny == 3:
     # TLAČIDLO V BOČNOM MENU
