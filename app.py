@@ -144,9 +144,7 @@ elif st.session_state.cislo_sceny == 2:
     # Sekcia pre správcu v bočnom paneli
     st.sidebar.header("Sekcia pre správcu")
     heslo = st.sidebar.text_input("Zadajte administrátorské heslo", type="password")
-    if st.sidebar.button("Zobraziť úvodnú obrazovku"):
-            st.session_state.klikol_pokracovat = False
-            st.rerun()
+    st.sidebar.button("Späť na úvod", use_container_width=True, on_click=preklop_na_uvod)
 
     if heslo == "admin123" or "ucitel26":
         st.sidebar.success("Prístup povolený!")
@@ -190,9 +188,7 @@ elif st.session_state.cislo_sceny == 2:
 # =========================================================================
 elif st.session_state.cislo_sceny == 3:
     # TLAČIDLO V BOČNOM MENU
-    if st.sidebar.button("Späť na úvod", use_container_width=True):
-        st.session_state.cislo_sceny = 1
-        st.rerun()
+    st.sidebar.button("Späť na úvod", use_container_width=True, on_click=preklop_na_uvod)
         
     col1, col2, col3 = st.columns(3)
     
