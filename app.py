@@ -1,34 +1,27 @@
 import streamlit as st
 import pandas as pd
-from streamlit_local_storage import StLocalStorage
 
 # 1. Nastavenie vzhľadu stránky
-st.set_page_config(page_title="Parlamentné hlasovanie", layout="wide")
+st.set_page_config(page_title="Hlasovanie", layout="wide")
 
-# Inicializácia trvalého úložiska v prehliadači
-local_storage = StLocalStorage()
+# =========================================================================
+# ZÁKLADNÉ PREDVOLENÉ ODKAZY (Sem vložte tie vaše pôvodné)
+# =========================================================================
+if "google_sheet_url" not in st.session_state:
+    st.session_state.google_sheet_url = "https://docs.google.com/spreadsheets/d/1tnZuvYAq47pbBpfAax0TfjGPSoCplkAXZmPD_GyjOTI/edit?usp=sharing"
 
-# Predvolené (štartovacie) odkazy – SEM VLOŽTE VAŠE AKTUÁLNE
-PREDVOLENA_TABULKA = "https://docs.google.com/spreadsheets/d/1tnZuvYAq47pbBpfAax0TfjGPSoCplkAXZmPD_GyjOTI/edit?usp=sharing"
-PREDVOLENY_FORMULAR = "https://docs.google.com/forms/d/e/1FAIpQLSdFRKTTneLhn0KpOZI-TJPyWR-6Qj5FWXjcImFznMErBtgHbg/viewform?usp=header"
-
-# Načítanie uložených odkazov z pamäte, inak sa použijú predvolené
-GOOGLE_SHEET_URL = local_storage.get("ulozeny_sheet")
-if GOOGLE_SHEET_URL is None:
-    GOOGLE_SHEET_URL = PREDVOLENA_TABULKA
-
-ODKAZ_NA_FORMULAR = local_storage.get("ulozeny_formular")
-if ODKAZ_NA_FORMULAR is None:
-    ODKAZ_NA_FORMULAR = PREDVOLENY_FORMULAR
+if "odkaz_na_formular" not in st.session_state:
+    st.session_state.odkaz_na_formular = "https://docs.google.com/forms/d/e/1FAIpQLSdFRKTTneLhn0KpOZI-TJPyWR-6Qj5FWXjcImFznMErBtgHbg/viewform?usp=header"
+# =========================================================================
 
 # Inicializácia stavu úvodnej obrazovky
 if "klikol_pokracovat" not in st.session_state:
     st.session_state.klikol_pokracovat = False
 
-# Funkcia na načítanie dát
+# Funkcia na bezpečné načítanie dát
 def nacitat_data_z_sheets():
     try:
-        base_url = GOOGLE_SHEET_URL.split("/edit")
+        base_url = st.session_state.google_sheet_url.split("/edit")
         csv_url_strany = f"{base_url[0]}/export?format=csv&gid=0"
         df = pd.read_csv(csv_url_strany)
         df.columns = ["Strana", "Hlasy"] + list(df.columns[2:])
@@ -42,10 +35,10 @@ def nacitat_data_z_sheets():
 # SCÉNA 1: ÚVODNÁ OBRAZOVKA
 # =========================================================================
 if st.session_state.klikol_pokracovat == False:
-    col1, col2, col3 = st.columns([1, 2, 1])
+    col1, col2, col3 = st.columns()
     with col2:
         st.markdown("<br><br>", unsafe_allow_html=True)
-        st.markdown("<h1 style='text-align: center;'>Volby</h1>", unsafe_allow_html=True)
+        st.markdown("<h1 style='text-align: center;'>🏛️ Školský parlament</h1>", unsafe_allow_html=True)
         st.markdown("<h3 style='text-align: center;'>Prieskum popularity strán a hlasovanie</h3>", unsafe_allow_html=True)
         st.write("Vítame vás v aplikácii. Tu môžete sledovať priebežné výsledky volieb v reálnom čase.")
         
@@ -55,7 +48,7 @@ if st.session_state.klikol_pokracovat == False:
             st.rerun()
 
 # =========================================================================
-# SCÉNA 2: HLAVNÁ OBRAZOVKA
+# SCÉNA 2: HLAVNÁ OBRAZOVKA (Graf, hlasovanie, správca)
 # =========================================================================
 else:
     st.title("Hlasovanie a popularita strán")
@@ -73,7 +66,7 @@ else:
     st.divider()
     st.subheader("Odovzdanie vášho hlasu")
     st.write("Hlasovanie je zabezpečené cez systém Google Forms.")
-    st.link_button("KLIKNI SEM A ODOVZDAJ SVOJ HLAS", ODKAZ_NA_FORMULAR, type="primary", use_container_width=True)
+    st.link_button("KLIKNI SEM A ODOVZDAJ SVOJ HLAS", st.session_state.odkaz_na_formular, type="primary", use_container_width=True)
 
     # Sekcia pre správcu v bočnom paneli
     st.sidebar.header("Sekcia pre správcu")
@@ -83,19 +76,21 @@ else:
         st.sidebar.success("Prístup povolený!")
         st.subheader("Administrácia a zmena zdrojov")
         
-        # --- NOVINKA: Inputy pre správcu na zmenu URL ---
-        nova_tabulka = st.text_input("URL novej Google Tabuľky:", value=GOOGLE_SHEET_URL)
-        novy_formular = st.text_input("URL nového Google Formulára:", value=ODKAZ_NA_FORMULAR)
+        # Vstupné polia pre správcu
+        nova_tabulka = st.text_input("URL novej Google Tabuľky:", value=st.session_state.google_sheet_url)
+        novy_formular = st.text_input("URL nového Google Formulára:", value=st.session_state.odkaz_na_formular)
         
-        if st.button("ULOŽIŤ NOVÉ ODKAZY NATRVALO"):
-            local_storage.set("ulozeny_sheet", nova_tabulka)
-            local_storage.set("ulozeny_formular", novy_formular)
-            st.success("Odkazy boli úspešne uložené a zmenené!")
+        if st.button("DOČASNE AKTUALIZOVAŤ ODKAZY"):
+            st.session_state.google_sheet_url = nova_tabulka
+            st.session_state.odkaz_na_formular = novy_formular
+            st.success("Odkazy boli v tejto relácii zmenené!")
             st.rerun()
             
+        st.info("Ak chcete zmeny uložiť navždy, skopírujte tieto odkazy a prepíšte ich na riadkoch 11 a 14 na GitHube.")
+        
         st.divider()
-        st.markdown(f"[Otvoriť aktívnu Google Tabuľku]({GOOGLE_SHEET_URL})")
-        odkaz_na_editaciu = ODKAZ_NA_FORMULAR.replace("/viewform", "/edit")
+        st.markdown(f"[Otvoriť aktívnu Google Tabuľku]({st.session_state.google_sheet_url})")
+        odkaz_na_editaciu = st.session_state.odkaz_na_formular.replace("/viewform", "/edit")
         st.link_button("PREJSŤ NA VYMAZANIE HLASOV", odkaz_na_editaciu, type="secondary", use_container_width=True)
         
         if st.sidebar.button("Zobraziť úvodnú obrazovku"):
