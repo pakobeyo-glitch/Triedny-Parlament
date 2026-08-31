@@ -9,8 +9,8 @@ st.set_page_config(page_title="Parlamentné hlasovanie", layout="wide")
 local_storage = StLocalStorage()
 
 # Predvolené (štartovacie) odkazy – SEM VLOŽTE VAŠE AKTUÁLNE
-PREDVOLENA_TABULKA = "https://google.com"
-PREDVOLENY_FORMULAR = "https://google.com"
+PREDVOLENA_TABULKA = "https://docs.google.com/spreadsheets/d/1tnZuvYAq47pbBpfAax0TfjGPSoCplkAXZmPD_GyjOTI/edit?usp=sharing"
+PREDVOLENY_FORMULAR = "https://docs.google.com/forms/d/e/1FAIpQLSdFRKTTneLhn0KpOZI-TJPyWR-6Qj5FWXjcImFznMErBtgHbg/viewform?usp=header"
 
 # Načítanie uložených odkazov z pamäte, inak sa použijú predvolené
 GOOGLE_SHEET_URL = local_storage.get("ulozeny_sheet")
