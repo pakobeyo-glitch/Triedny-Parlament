@@ -111,7 +111,19 @@ else:
             st.rerun()
             
         st.info("Ak chcete zmeny uložiť navždy, skopírujte tieto odkazy a prepíšte ich na riadkoch 11 a 14 na GitHube.")
+
+        st.divider()
+        st.subheader("Ovládanie hlasovania")
         
+        # Prepínač, ktorý mení True/False v pamäti
+        stav = st.radio("Stav volebnej miestnosti:", ("Zapnuté (Otvorené)", "Vypnuté (Zatvorené)"), 
+                        index=0 if st.session_state.hlasovanie_povolene else 1)
+        
+        if st.button("POTVRDIŤ ZMENU STAVU"):
+            st.session_state.hlasovanie_povolene = (stav == "Zapnuté (Otvorené)")
+            st.success(f"Stav hlasovania bol zmenený na: {stav}")
+            st.rerun()
+            
         st.divider()
         st.markdown(f"[Otvoriť aktívnu Google Tabuľku]({st.session_state.google_sheet_url})")
         odkaz_na_editaciu = st.session_state.odkaz_na_formular.replace("/viewform", "/edit")
