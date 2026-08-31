@@ -81,7 +81,7 @@ else:
     st.write("Hlasovanie je zabezpečené cez systém Google Forms.")
     st.link_button("KLIKNI SEM A ODOVZDAJ SVOJ HLAS", st.session_state.odkaz_na_formular, type="primary", use_container_width=True)
     st.divider()
-    st.write("Pri komplikáciach sa obráťte na email chlebus1@mudronka.sk, alebo na mňa osobne")
+    st.write("Pri komplikáciach sa obráťte na email chlebus1@mudronka.sk, alebo na mňa osobne.")
 
     # Sekcia pre správcu v bočnom paneli
     st.sidebar.header("Sekcia pre správcu")
