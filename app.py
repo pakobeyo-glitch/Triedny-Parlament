@@ -19,6 +19,16 @@ if "hlasovanie_povolene" not in st.session_state:
 # Pamäť pre číslo scény (1 = Úvod, 2 = Grafy/Hlasovanie, 3 = Informácie)
 if "cislo_sceny" not in st.session_state:
     st.session_state.cislo_sceny = 1
+
+# Pomocné funkcie na zmenu scény, ktoré Streamlit vykoná okamžite pri kliknutí
+def preklop_na_uvod():
+    st.session_state.cislo_sceny = 1
+
+def preklop_na_grafy():
+    st.session_state.cislo_sceny = 2
+
+def preklop_na_info():
+    st.session_state.cislo_sceny = 3
     
 # =========================================================================
 
@@ -72,16 +82,12 @@ if st.session_state.klikol_pokracovat == False:
         )
         
         # Grafy a Hlasovanie (Scéna 2)
-        if st.button("POKRAČOVAŤ NA HLASOVANIE", type="primary", use_container_width=True):
-            st.session_state.cislo_sceny = 2
-            st.rerun()
+        st.button("POKRAČOVAŤ NA STRÁNKU", type="primary", use_container_width=True, on_click=preklop_na_grafy):
             
         st.markdown("<div style='margin-bottom: 10px;'></div>", unsafe_allow_html=True)
         
         # Nová textová scéna (Scéna 3)
-        if st.button("BÁSEŇ", type="secondary", use_container_width=True):
-            st.session_state.cislo_sceny = 3
-            st.rerun()
+        St.button("PRAVIDLÁ", type="secondary", use_container_width=True, on_click=preklop_na_info)
 
 # =========================================================================
 # SEKCIA 2: HLAVNÁ OBRAZOVKA (Graf, hlasovanie, správca)
