@@ -41,6 +41,16 @@ def nacitat_data_z_sheets():
 if st.session_state.klikol_pokracovat == False:
     col1, col2, col3 = st.columns(3)
     with col2:
+        st.markdown("<br>", unsafe_allow_html=True)
+        
+        # --- TU JE NOVÉ LOGO ---
+        # Nahraďte túto URL adresu odkazom na akékoľvek logo (napr. zo školského webu)
+        URL_LOGA = "https://mudronka.edupage.org/photos/skin/logo/logo_skoly.jpg"
+        
+        # Zobrazenie loga (vycentrované s nastavenou šírkou)
+        st.image(URL_LOGA, width=200, use_container_width=False)
+        # ------------------------
+        
         st.markdown("<br><br>", unsafe_allow_html=True)
         st.markdown("<h1 style='text-align: center;'>Volby</h1>", unsafe_allow_html=True)
         st.markdown("<h3 style='text-align: center;'>Prieskum popularity strán a hlasovanie</h3>", unsafe_allow_html=True)
