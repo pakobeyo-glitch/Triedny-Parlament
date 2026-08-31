@@ -59,8 +59,21 @@ else:
         celkovo_hlasov = df_db["Hlasy"].sum()
         df_db["Percentá (%)"] = df_db["Hlasy"].apply(lambda x: round((x / celkovo_hlasov) * 100, 2) if celkovo_hlasov > 0 else 0)
 
-        st.subheader("Aktuálne výsledky popularity strán")
+        # Vykreslenie grafov
+        st.subheader("Priebežné výsledky popularity strán")
+        
+        # 1. Klasický stĺpcový graf
+        st.write("Stĺpcový prehľad:")
         st.bar_chart(df_db.set_index("Strana")["Percentá (%)"])
+        
+        # 2. Koláčový graf
+        st.write("Podielový (koláčový) prehľad:")
+        import plotly.express as px
+        fig = px.pie(df_db, values='Percentá (%)', names='Strana', 
+                     color_discrete_sequence=px.colors.sequential.RdBu)
+        st.plotly_chart(fig, use_container_width=True)
+        
+        # Pôvodná tabuľka s podrobnosťami
         st.dataframe(df_db[["Strana", "Hlasy", "Percentá (%)"]], use_container_width=True, hide_index=True)
 
     st.divider()
