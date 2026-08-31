@@ -118,6 +118,9 @@ else:
     # Sekcia pre správcu v bočnom paneli
     st.sidebar.header("Sekcia pre správcu")
     heslo = st.sidebar.text_input("Zadajte administrátorské heslo", type="password")
+    if st.sidebar.button("Zobraziť úvodnú obrazovku"):
+            st.session_state.klikol_pokracovat = False
+            st.rerun()
 
     if heslo == "admin123" or "ucitel26":
         st.sidebar.success("Prístup povolený!")
@@ -152,10 +155,6 @@ else:
         st.markdown(f"[Otvoriť aktívnu Google Tabuľku]({st.session_state.google_sheet_url})")
         odkaz_na_editaciu = st.session_state.odkaz_na_formular.replace("/viewform", "/edit")
         st.link_button("PREJSŤ NA VYMAZANIE HLASOV", odkaz_na_editaciu, type="secondary", use_container_width=True)
-        
-        if st.sidebar.button("Zobraziť úvodnú obrazovku"):
-            st.session_state.klikol_pokracovat = False
-            st.rerun()
                 
     elif heslo != "":
         st.sidebar.error("Nesprávne heslo!")
