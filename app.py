@@ -46,7 +46,7 @@ if not df_db.empty:
     df_db["Percentá (%)"] = df_db["Hlasy"].apply(lambda x: round((x / celkovo_hlasov) * 100, 2) if celkovo_hlasov > 0 else 0)
 
     # --- ROLA: SLEDOVATEĽ (Zobrazenie grafu pre všetkých) ---
-    st.subheader("Aktuálne výsledky popularity strán")
+    st.subheader("Aktuálne výsledky popularity období")
     st.bar_chart(df_db.set_index("Strana")["Percentá (%)"])
     
     # Prehľadná tabuľka s podrobnosťami pod grafom
