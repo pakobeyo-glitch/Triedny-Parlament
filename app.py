@@ -1,26 +1,13 @@
 import streamlit as st
 import pandas as pd
+import plotly.express as px
 
-# 1. Nastavenie vzhľadu stránky
+# 1. Nastavenie vzhľadu stránky (MUSÍ BYŤ ÚPLNE PRVÉ)
 st.set_page_config(page_title="Hlasovanie", layout="wide")
 
 # =========================================================================
-# ZÁKLADNÉ PREDVOLENÉ ODKAZY (Sem vložte tie vaše pôvodné)
+# FUNKCIE NA PREPÍNANIE SCÉN (Definované hore, aby ich Python hneď poznal)
 # =========================================================================
-if "google_sheet_url" not in st.session_state:
-    st.session_state.google_sheet_url = "https://docs.google.com/spreadsheets/d/1tnZuvYAq47pbBpfAax0TfjGPSoCplkAXZmPD_GyjOTI/edit?usp=sharing"
-
-if "odkaz_na_formular" not in st.session_state:
-    st.session_state.odkaz_na_formular = "https://docs.google.com/forms/d/e/1FAIpQLSdFRKTTneLhn0KpOZI-TJPyWR-6Qj5FWXjcImFznMErBtgHbg/viewform?usp=header"
-
-if "hlasovanie_povolene" not in st.session_state:
-    st.session_state.hlasovanie_povolene = True
-
-# Pamäť pre číslo scény (1 = Úvod, 2 = Grafy/Hlasovanie, 3 = Informácie)
-if "cislo_sceny" not in st.session_state:
-    st.session_state.cislo_sceny = 1
-
-# Pomocné funkcie na zmenu scény, ktoré Streamlit vykoná okamžite pri kliknutí
 def preklop_na_uvod():
     st.session_state.cislo_sceny = 1
 
@@ -29,16 +16,23 @@ def preklop_na_grafy():
 
 def preklop_na_info():
     st.session_state.cislo_sceny = 3
-    
+
 # =========================================================================
+# ZÁKLADNÉ PREDVOLENÉ ODKAZY
+# =========================================================================
+if "google_sheet_url" not in st.session_state:
+    st.session_state.google_sheet_url = "https://google.com"
 
-# Inicializácia stavu úvodnej obrazovky
-if "klikol_pokracovat" not in st.session_state:
-    st.session_state.klikol_pokracovat = False
+if "odkaz_na_formular" not in st.session_state:
+    st.session_state.odkaz_na_formular = "https://google.com"
 
-# Inicializácia stavu hlasovania (Predvolene zapnuté)
 if "hlasovanie_povolene" not in st.session_state:
     st.session_state.hlasovanie_povolene = True
+
+# Pamäť pre číslo scény (1 = Úvod, 2 = Grafy/Hlasovanie, 3 = Informácie)
+if "cislo_sceny" not in st.session_state:
+    st.session_state.cislo_sceny = 1
+# =========================================================================
 
 # Funkcia na bezpečné načítanie dát
 def nacitat_data_z_sheets():
@@ -53,51 +47,44 @@ def nacitat_data_z_sheets():
         st.error(f"Chyba pri načítaní dát z Google Tabuľky: {e}")
         return pd.DataFrame()
 
+
 # =========================================================================
-# SCÉNA 1: ÚVODNÁ OBRAZOVKA
+# SCÉNA 1: ÚVODNÁ OBRAZOVKA (Rozcestník)
 # =========================================================================
-if st.session_state.klikol_pokracovat == False:
-    # Vytvoríme 3 stĺpce, stredný bude o niečo širší (pomer 1:2:1), aby text dobre vyzeral
-    col1, col2, col3 = st.columns([1, 2, 1])
+if st.session_state.cislo_sceny == 1:
+    col1, col2, col3 = st.columns(3)
     
     with col2:
         st.markdown("<br><br>", unsafe_allow_html=True)
+        URL_LOGA = "https://freepik.com"
         
-        # Odkaz na vaše logo
-        URL_LOGA = "https://mudronka.edupage.org/photos/skin/logo/logo_skoly.jpg"
-        
-        # --- HTML TRIK NA VYCENTROVANIE LOGA A TEXTOV ---
         st.markdown(
             f"""
             <div style="text-align: center;">
-                <img src="{URL_LOGA}" width="180" style="margin-bottom: 20px;">
+                <img src="{URL_LOGA}" width="180" style="margin-bottom: 20px; border-radius: 10px;">
                 <h1 style="margin-top: 0px;">Hlasovanie</h1>
                 <h3>Prieskum popularity strán a hlasovanie</h3>
                 <p style="font-size: 16px; color: #555; margin-bottom: 30px;">
-                    Vítame vás v aplikácii. Tu môžete sledovať priebežné výsledky volieb v reálnom čase a bezpečne odovzdať svoj hlas.
+                    Vítame vás v aplikácii. Vyberte si, kam chcete pokračovať:
                 </p>
             </div>
             """, 
             unsafe_allow_html=True
         )
         
-        # Grafy a Hlasovanie (Scéna 2)
+        # Samostatné riadky s tlačidlami pomocou on_click (BEZ DVOJBODIEK NA KONCI)
         st.button("POKRAČOVAŤ NA STRÁNKU", type="primary", use_container_width=True, on_click=preklop_na_grafy)
-            
         st.markdown("<div style='margin-bottom: 10px;'></div>", unsafe_allow_html=True)
-        
-        # Nová textová scéna (Scéna 3)
-        st.button("PRAVIDLÁ", type="secondary", use_container_width=True, on_click=preklop_na_info)
+        st.button("PRAVIDLÁ A INFORMÁCIE", type="secondary", use_container_width=True, on_click=preklop_na_info)
+
 
 # =========================================================================
-# SEKCIA 2: HLAVNÁ OBRAZOVKA (Graf, hlasovanie, správca)
+# SCÉNA 2: HLAVNÁ OBRAZOVKA (Grafy, hlasovanie, správca)
 # =========================================================================
 elif st.session_state.cislo_sceny == 2:
     # Tlačidlo späť v bočnom menu pre Scénu 2
-    if st.sidebar.button("Späť na úvod", use_container_width=True):
-        st.session_state.cislo_sceny = 1
-        st.rerun()
-
+    st.sidebar.button("Späť na úvod", use_container_width=True, on_click=preklop_na_uvod)
+        
     st.title("Hlasovanie a popularita strán")
     
     df_db = nacitat_data_z_sheets()
@@ -106,73 +93,51 @@ elif st.session_state.cislo_sceny == 2:
         celkovo_hlasov = df_db["Hlasy"].sum()
         df_db["Percentá (%)"] = df_db["Hlasy"].apply(lambda x: round((x / celkovo_hlasov) * 100, 2) if celkovo_hlasov > 0 else 0)
 
-        # Vykreslenie grafov
         st.subheader("Priebežné výsledky popularity strán")
-        
-        # 1. Klasický stĺpcový graf
         st.write("Stĺpcový prehľad:")
         st.bar_chart(df_db.set_index("Strana")["Percentá (%)"])
         
-        # 2. Koláčový graf
-        st.write("Koláčový prehľad:")
-        import plotly.express as px
-        fig = px.pie(df_db, values='Percentá (%)', names='Strana', 
-                     color_discrete_sequence=px.colors.sequential.RdBu)
+        st.write("Podielový (koláčový) prehľad:")
+        fig = px.pie(df_db, values='Percentá (%)', names='Strana', color_discrete_sequence=px.colors.sequential.RdBu)
         st.plotly_chart(fig, use_container_width=True)
         
-        # Pôvodná tabuľka s podrobnosťami
         st.dataframe(df_db[["Strana", "Hlasy", "Percentá (%)"]], use_container_width=True, hide_index=True)
 
-# =========================================================================
-# SEKCIA 3: ROLE
-# =========================================================================
-    # --- ROLA: VOLIČ ---
     st.divider()
     st.subheader("Odovzdanie vášho hlasu")
-    
-    # Kód skontroluje, či správca hlasovanie nevypol
     if st.session_state.hlasovanie_povolene:
         st.write("Hlasovanie je zabezpečené cez systém Google Forms.")
         st.link_button("KLIKNI SEM A ODOVZDAJ SVOJ HLAS", st.session_state.odkaz_na_formular, type="primary", use_container_width=True)
     else:
-        # Ak je vypnuté, tlačidlo zmizne a ukáže sa toto:
         st.error("Hlasovanie bolo správcom ukončené. Nové hlasy už nie je možné odovzdať.")
-        
+
     st.divider()
-    st.write("Pri problémoch sa prosím obráťte na mňa, alebo mi napíšte na email chlebus1@mudronka.sk")
-    
+    st.write("V prípade komplikácii sa obráťte na mňa, alebo mi napíšte na email chlebus1@mudronka.sk.")
+
     # Sekcia pre správcu v bočnom paneli
+    st.sidebar.divider()
     st.sidebar.header("Sekcia pre správcu")
     heslo = st.sidebar.text_input("Zadajte administrátorské heslo", type="password")
-    st.sidebar.button("Späť na úvod", use_container_width=True, on_click=preklop_na_uvod)
 
-    if heslo == "admin123" or "ucitel26":
+    if heslo == "admin123":
         st.sidebar.success("Prístup povolený!")
-        st.divider()
         st.subheader("Administrácia a zmena zdrojov")
         
-        # Vstupné polia pre správcu
         nova_tabulka = st.text_input("URL novej Google Tabuľky:", value=st.session_state.google_sheet_url)
         novy_formular = st.text_input("URL nového Google Formulára:", value=st.session_state.odkaz_na_formular)
         
         if st.button("DOČASNE AKTUALIZOVAŤ ODKAZY"):
             st.session_state.google_sheet_url = nova_tabulka
             st.session_state.odkaz_na_formular = novy_formular
-            st.success("Odkazy boli v tejto relácii zmenené!")
+            st.success("Odkazy zmenené!")
             st.rerun()
             
-        st.info("Ak chcete zmeny uložiť navždy, skopírujte tieto odkazy a prepíšte ich na riadkoch 11 a 14 na GitHube.")
-
         st.divider()
         st.subheader("Ovládanie hlasovania")
-        
-        # Prepínač, ktorý mení True/False v pamäti
-        stav = st.radio("Stav volebnej miestnosti:", ("Zapnuté (Otvorené)", "Vypnuté (Zatvorené)"), 
-                        index=0 if st.session_state.hlasovanie_povolene else 1)
-        
+        stav = st.radio("Stav volebnej miestnosti:", ("Zapnuté (Otvorené)", "Vypnuté (Zatvorené)"), index=0 if st.session_state.hlasovanie_povolene else 1)
         if st.button("POTVRDIŤ ZMENU STAVU"):
             st.session_state.hlasovanie_povolene = (stav == "Zapnuté (Otvorené)")
-            st.success(f"Stav hlasovania bol zmenený na: {stav}")
+            st.success(f"Stav zmenený na: {stav}")
             st.rerun()
             
         st.divider()
@@ -183,11 +148,12 @@ elif st.session_state.cislo_sceny == 2:
     elif heslo != "":
         st.sidebar.error("Nesprávne heslo!")
 
+
 # =========================================================================
-# SCÉNA 4: ČISTÁ TEXTOVÁ OBRAZOVKA (Informácie)
+# SCÉNA 3: ČISTÁ TEXTOVÁ OBRAZOVKA (Informácie)
 # =========================================================================
 elif st.session_state.cislo_sceny == 3:
-    # TLAČIDLO V BOČNOM MENU
+    # Tlačidlo späť v bočnom menu pre Scénu 3
     st.sidebar.button("Späť na úvod", use_container_width=True, on_click=preklop_na_uvod)
         
     col1, col2, col3 = st.columns(3)
