@@ -38,7 +38,7 @@ if st.session_state.klikol_pokracovat == False:
     col1, col2, col3 = st.columns(3)
     with col2:
         st.markdown("<br><br>", unsafe_allow_html=True)
-        st.markdown("<h1 style='text-align: center;'>🏛️ Školský parlament</h1>", unsafe_allow_html=True)
+        st.markdown("<h1 style='text-align: center;'>Volby</h1>", unsafe_allow_html=True)
         st.markdown("<h3 style='text-align: center;'>Prieskum popularity strán a hlasovanie</h3>", unsafe_allow_html=True)
         st.write("Vítame vás v aplikácii. Tu môžete sledovať priebežné výsledky volieb v reálnom čase.")
         
