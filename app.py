@@ -82,7 +82,7 @@ if st.session_state.klikol_pokracovat == False:
         )
         
         # Grafy a Hlasovanie (Scéna 2)
-        st.button("POKRAČOVAŤ NA STRÁNKU", type="primary", use_container_width=True, on_click=preklop_na_grafy):
+        st.button("POKRAČOVAŤ NA STRÁNKU", type="primary", use_container_width=True, on_click=preklop_na_grafy)
             
         st.markdown("<div style='margin-bottom: 10px;'></div>", unsafe_allow_html=True)
         
