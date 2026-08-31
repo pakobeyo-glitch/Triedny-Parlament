@@ -96,7 +96,7 @@ else:
     st.sidebar.header("Sekcia pre správcu")
     heslo = st.sidebar.text_input("Zadajte administrátorské heslo", type="password")
 
-    if heslo == "admin123":
+    if heslo == "admin123" or "ucitel26":
         st.sidebar.success("Prístup povolený!")
         st.subheader("Administrácia a zmena zdrojov")
         
