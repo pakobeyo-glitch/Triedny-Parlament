@@ -36,27 +36,34 @@ def nacitat_data_z_sheets():
         return pd.DataFrame()
 
 # =========================================================================
-# SEKCIA 1: ÚVODNÁ OBRAZOVKA
+# SCÉNA 1: ÚVODNÁ OBRAZOVKA
 # =========================================================================
 if st.session_state.klikol_pokracovat == False:
-    col1, col2, col3 = st.columns(3)
+    # Vytvoríme 3 stĺpce, stredný bude o niečo širší (pomer 1:2:1), aby text dobre vyzeral
+    col1, col2, col3 = st.columns([1, 2, 1])
+    
     with col2:
-        st.markdown("<br>", unsafe_allow_html=True)
+        st.markdown("<br><br>", unsafe_allow_html=True)
         
-        # --- TU JE NOVÉ LOGO ---
-        # Nahraďte túto URL adresu odkazom na akékoľvek logo (napr. zo školského webu)
+        # Odkaz na vaše logo
         URL_LOGA = "https://mudronka.edupage.org/photos/skin/logo/logo_skoly.jpg"
         
-        # Zobrazenie loga (vycentrované s nastavenou šírkou)
-        st.image(URL_LOGA, width=200, use_container_width=False)
-        # ------------------------
+        # --- HTML TRIK NA VYCENTROVANIE LOGA A TEXTOV ---
+        st.markdown(
+            f"""
+            <div style="text-align: center;">
+                <img src="{URL_LOGA}" width="180" style="margin-bottom: 20px;">
+                <h1 style="margin-top: 0px;">Hlasovanie</h1>
+                <h3>Prieskum popularity strán a hlasovanie</h3>
+                <p style="font-size: 16px; color: #555; margin-bottom: 30px;">
+                    Vítame vás v aplikácii. Tu môžete sledovať priebežné výsledky volieb v reálnom čase a bezpečne odovzdať svoj hlas.
+                </p>
+            </div>
+            """, 
+            unsafe_allow_html=True
+        )
         
-        st.markdown("<br><br>", unsafe_allow_html=True)
-        st.markdown("<h1 style='text-align: center;'>Volby</h1>", unsafe_allow_html=True)
-        st.markdown("<h3 style='text-align: center;'>Prieskum popularity strán a hlasovanie</h3>", unsafe_allow_html=True)
-        st.write("Vítame vás v aplikácii. Tu môžete sledovať priebežné výsledky volieb.")
-        
-        st.markdown("<br>", unsafe_allow_html=True)
+        # Tlačidlo (Streamlit ho v stĺpci automaticky roztiahne na plnú šírku stĺpca)
         if st.button("POKRAČOVAŤ", type="primary", use_container_width=True):
             st.session_state.klikol_pokracovat = True
             st.rerun()
