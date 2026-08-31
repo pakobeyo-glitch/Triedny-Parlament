@@ -13,7 +13,7 @@ if "google_sheet_url" not in st.session_state:
 if "odkaz_na_formular" not in st.session_state:
     st.session_state.odkaz_na_formular = "https://docs.google.com/forms/d/e/1FAIpQLSdFRKTTneLhn0KpOZI-TJPyWR-6Qj5FWXjcImFznMErBtgHbg/viewform?usp=header"
 
-if "cislo_sceny" not in st.session_state:
+if "hlasovanie_povolene" not in st.session_state:
     st.session_state.hlasovanie_povolene = True
 
 # Pamäť pre číslo scény (1 = Úvod, 2 = Grafy/Hlasovanie, 3 = Informácie)
