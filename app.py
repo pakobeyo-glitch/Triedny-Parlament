@@ -72,7 +72,7 @@ if st.session_state.klikol_pokracovat == False:
         )
         
         # Grafy a Hlasovanie (Scéna 2)
-        if st.button("POKRAČOVAŤ NA HLASOVANIE" type="primary", use_container_width=True):
+        if st.button("POKRAČOVAŤ NA HLASOVANIE", type="primary", use_container_width=True):
             st.session_state.cislo_sceny = 2
             st.rerun()
             
