@@ -124,7 +124,7 @@ elif st.session_state.cislo_sceny == 2:
         if st.session_state.hlasovanie_povolene:
             st.write("(Teraz môžu hlasovať všetci.)")
         else:
-            st.divider
+            st.divider()
             st.write("Hlasovanie je zabezpečené cez systém Google Forms.")
             st.link_button("KLIKNI SEM A ODOVZDAJ SVOJ HLAS", st.session_state.odkaz_na_formular, type="primary", use_container_width=True)
             st.write("(Teraz môžete hlasovať iba vy.)")
