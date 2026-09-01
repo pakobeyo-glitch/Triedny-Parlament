@@ -111,8 +111,8 @@ elif st.session_state.cislo_sceny == 2:
     else:
         st.error("Hlasovanie bolo správcom ukončené. Nové hlasy už nie je možné odovzdať.")
 
-    st.divider()
-    st.write("V prípade komplikácii sa obráťte na mňa, alebo mi napíšte na email chlebus1@mudronka.sk.")
+    st.sidebar.divider()
+    st.sidebar.write("V prípade komplikácii sa obráťte na mňa, alebo mi napíšte na email chlebus1@mudronka.sk.")
 
     # Sekcia pre správcu v bočnom paneli
     st.sidebar.divider()
@@ -121,16 +121,17 @@ elif st.session_state.cislo_sceny == 2:
 
     if heslo == "admin123":
         st.sidebar.success("Prístup povolený!")
-        st.subheader("Administrácia a zmena zdrojov")
-
         if st.session_state.hlasovanie_povolene:
             st.write("(Teraz môžu hlasovať všetci.)")
         else:
+            st.divider
             st.write("Hlasovanie je zabezpečené cez systém Google Forms.")
             st.link_button("KLIKNI SEM A ODOVZDAJ SVOJ HLAS", st.session_state.odkaz_na_formular, type="primary", use_container_width=True)
             st.write("(Teraz môžete hlasovať iba vy.)")
+            
+        st.divider()
+        st.subheader("Administrácia a zmena zdrojov")
 
-        
         nova_tabulka = st.text_input("URL novej Google Tabuľky:", value=st.session_state.google_sheet_url)
         novy_formular = st.text_input("URL nového Google Formulára:", value=st.session_state.odkaz_na_formular)
         
