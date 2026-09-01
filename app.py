@@ -212,5 +212,5 @@ elif st.session_state.cislo_sceny == 4:
         st.write("A pravda pravdou zostáva ")
         st.write("pod potmehúdskym slncom: ")
         st.write("voliči prídu ku urnám")
-        st.write(a vyvolený - k hrncom.")
+        st.write("a vyvolený - k hrncom.")
         st.write("Janko Jesenský,  17. júla 1929.")
