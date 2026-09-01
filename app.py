@@ -17,7 +17,7 @@ def preklop_na_grafy():
 def preklop_na_info():
     st.session_state.cislo_sceny = 3
 
-def preklop_na_basen():
+def preklop_na_basne():
     st.session_state.cislo_sceny = 4
 
 # =========================================================================
