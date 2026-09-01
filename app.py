@@ -117,11 +117,19 @@ elif st.session_state.cislo_sceny == 2:
     # Sekcia pre správcu v bočnom paneli
     st.sidebar.divider()
     st.sidebar.header("Sekcia pre správcu")
-    heslo = st.sidebar.text_input("Zadajte administrátorské heslo", type="password")
+    heslo = st.sidebar.text_input("Zadajte správcovské", type="password")
 
     if heslo == "admin123":
         st.sidebar.success("Prístup povolený!")
         st.subheader("Administrácia a zmena zdrojov")
+
+        if st.session_state.hlasovanie_povolene:
+            st.write("(Teraz môžu hlasovať všetci.)")
+        else:
+            st.write("Hlasovanie je zabezpečené cez systém Google Forms.")
+            st.link_button("KLIKNI SEM A ODOVZDAJ SVOJ HLAS", st.session_state.odkaz_na_formular, type="primary", use_container_width=True)
+            st.write("(Teraz môžete hlasovať iba vy.)")
+
         
         nova_tabulka = st.text_input("URL novej Google Tabuľky:", value=st.session_state.google_sheet_url)
         novy_formular = st.text_input("URL nového Google Formulára:", value=st.session_state.odkaz_na_formular)
