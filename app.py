@@ -194,7 +194,7 @@ elif st.session_state.cislo_sceny == 4:
         
         # --- SEM SI MÔŽETE NAPÍSAŤ SVOJ ČISTÝ TEXT ---
         st.write("Tu je pre vás, milí voliči, nejaké povzbudenie pred voľbami:")
-        st.write("V tých voľbách demokratických 
+        st.write("V tých voľbách demokratických ")
         st.write("je predsa čosi novô,")
         st.write("a to je, že hlas národ má")
         st.write("a vyvolený slovo.")
