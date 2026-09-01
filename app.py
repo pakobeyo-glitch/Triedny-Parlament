@@ -193,7 +193,7 @@ elif st.session_state.cislo_sceny == 4:
         st.markdown("<h1 style='text-align: center;'>BÁSEŇ</h1>", unsafe_allow_html=True)
         
         # --- SEM SI MÔŽETE NAPÍSAŤ SVOJ ČISTÝ TEXT ---
-        st.swrite("**Tu je pre vás, milí voliči, nejaké povzbudenie pred voľbami:**")
+        st.write("**Tu je pre vás, milí voliči, nejaké povzbudenie pred voľbami:**")
         st.divider()
         st.write("V tých voľbách demokratických ")
         st.write("je predsa čosi novô,")
