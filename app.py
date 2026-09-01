@@ -190,7 +190,7 @@ elif st.session_state.cislo_sceny == 4:
     
     with col2:
         st.markdown("<br><br>", unsafe_allow_html=True)
-        st.markdown("<h1 style='text-align: center;'>Básne</h1>", unsafe_allow_html=True)
+        st.markdown("<h1 style='text-align: center;'></h1>", unsafe_allow_html=True)
         
         # --- SEM SI MÔŽETE NAPÍSAŤ SVOJ ČISTÝ TEXT ---
         st.write("Tu je pre vás, milí voliči, nejaké povzbudenie pred voľbami:")
