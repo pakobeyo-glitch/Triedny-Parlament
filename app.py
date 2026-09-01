@@ -195,22 +195,22 @@ elif st.session_state.cislo_sceny == 4:
         # --- SEM SI MÔŽETE NAPÍSAŤ SVOJ ČISTÝ TEXT ---
         st.write("Tu je pre vás, milí voliči, nejaké povzbudenie pred voľbami:")
         st.write("V tých voľbách demokratických 
-        je predsa čosi novô, 
-        a to je, že hlas národ má 
-        a vyvolený slovo. 
- 
-        Pred dažďom rastú oblaky , 
-        pred voľbami zas sľuby, 
-        po daždi rastú rýdziky , 
-        po voľbách – prázdne huby. 
- 
-        Pri voľbách národ vyberie 
-        si stranu milovanú, 
-        po voľbách strana milovaná 
-        ho odloží – na stranu. 
- 
-        A pravda pravdou zostáva 
-        pod potmehúdskym slncom: 
-        voliči prídu ku urnám 
-        a vyvolený – k hrncom.")
+        st.write("je predsa čosi novô,")
+        st.write("a to je, že hlas národ má")
+        st.write("a vyvolený slovo.")
+        st.write("")
+        st.write("Pred dažďom rastú oblaky ,")
+        st.write("pred voľbami zas sľuby, ")
+        st.write("po daždi rastú rýdziky , ")
+        st.write("po voľbách – prázdne huby. ")
+        st.write("")
+        st.write("Pri voľbách národ vyberie ")
+        st.write("si stranu milovanú, ")
+        st.write("po voľbách strana milovaná ")
+        st.write("ho odloží – na stranu. ")
+        st.write("")
+        st.write("A pravda pravdou zostáva ")
+        st.write("pod potmehúdskym slncom: ")
+        st.write("voliči prídu ku urnám")
+        st.write(a vyvolený – k hrncom.")
         st.write("Janko Jesenský,  17. júla 1929.")
