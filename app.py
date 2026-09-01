@@ -82,7 +82,7 @@ if st.session_state.cislo_sceny == 1:
         st.button("PRAVIDLÁ A INFORMÁCIE", type="secondary", use_container_width=True, on_click=preklop_na_info)
 
         st.markdown("<div style='margin-bottom: 10px;'></div>", unsafe_allow_html=True)
-        st.button("BÁSNE", type="secondary", use_container_width=True, on_click=preklop_na_basne)
+        st.button("BÁSEŇ", type="secondary", use_container_width=True, on_click=preklop_na_basne)
 # =========================================================================
 # SCÉNA 2: HLAVNÁ OBRAZOVKA (Grafy, hlasovanie, správca)
 # =========================================================================
@@ -190,7 +190,7 @@ elif st.session_state.cislo_sceny == 4:
     
     with col2:
         st.markdown("<br><br>", unsafe_allow_html=True)
-        st.markdown("<h1 style='text-align: center;'></h1>", unsafe_allow_html=True)
+        st.markdown("<h1 style='text-align: center;'>BÁSEŇ</h1>", unsafe_allow_html=True)
         
         # --- SEM SI MÔŽETE NAPÍSAŤ SVOJ ČISTÝ TEXT ---
         st.write("Tu je pre vás, milí voliči, nejaké povzbudenie pred voľbami:")
