@@ -178,6 +178,9 @@ elif st.session_state.cislo_sceny == 3:
         
         # --- SEM SI MÔŽETE NAPÍSAŤ SVOJ ČISTÝ TEXT ---
         st.write("Tu sú základné informácie o našom parlamentnom prieskume:")
+        st.write("Každý môže voliť iba raz.")
+        st.write("Dobre si premyslite koho zvolíte. **Svoju voľbu už nemôžte zmeniť.**")
+        st.write("*Prajem vám, aby ste volili múdro a obozretne! Nech si dobre zvolíte!*")
 
 # =========================================================================
 # SCÉNA 4: BÁSNE
