@@ -17,6 +17,9 @@ def preklop_na_grafy():
 def preklop_na_info():
     st.session_state.cislo_sceny = 3
 
+def preklop_na_basen():
+    st.session_state.cislo_sceny = 4
+
 # =========================================================================
 # ZÁKLADNÉ PREDVOLENÉ ODKAZY
 # =========================================================================
@@ -29,7 +32,7 @@ if "odkaz_na_formular" not in st.session_state:
 if "hlasovanie_povolene" not in st.session_state:
     st.session_state.hlasovanie_povolene = True
 
-# Pamäť pre číslo scény (1 = Úvod, 2 = Grafy/Hlasovanie, 3 = Informácie)
+# Pamäť pre číslo scény (1 = Úvod, 2 = Grafy/Hlasovanie, 3 = Informácie, 4 = básne)
 if "cislo_sceny" not in st.session_state:
     st.session_state.cislo_sceny = 1
 # =========================================================================
@@ -72,12 +75,14 @@ if st.session_state.cislo_sceny == 1:
             unsafe_allow_html=True
         )
         
-        # Samostatné riadky s tlačidlami pomocou on_click (BEZ DVOJBODIEK NA KONCI)
+        # Samostatné riadky s tlačidlami pomocou on_click
         st.button("POKRAČOVAŤ NA STRÁNKU", type="primary", use_container_width=True, on_click=preklop_na_grafy)
+        
         st.markdown("<div style='margin-bottom: 10px;'></div>", unsafe_allow_html=True)
         st.button("PRAVIDLÁ A INFORMÁCIE", type="secondary", use_container_width=True, on_click=preklop_na_info)
 
-
+        st.markdown("<div style='margin-bottom: 10px;'></div>", unsafe_allow_html=True)
+        st.button("BÁSNE", type="secondary", use_container_width=True, on_click=preklop_na_basne)
 # =========================================================================
 # SCÉNA 2: HLAVNÁ OBRAZOVKA (Grafy, hlasovanie, správca)
 # =========================================================================
@@ -173,7 +178,39 @@ elif st.session_state.cislo_sceny == 3:
         
         # --- SEM SI MÔŽETE NAPÍSAŤ SVOJ ČISTÝ TEXT ---
         st.write("Tu sú základné informácie o našom parlamentnom prieskume:")
-        st.write("1. Každý žiak má právo odovzdať **iba jeden platný hlas**.")
-        st.write("2. Hlasovanie prebieha anonymne prostredníctvom priloženého Google formulára.")
-        st.write("3. Výsledky sa aktualizujú naživo každých pár minút po odoslaní formulára.")
-        st.info("Pred hlasovaním si poriadne premyslite svoju voľbu. Hlas nie je možné vziať späť.")
+
+# =========================================================================
+# SCÉNA 4: BÁSNE
+# =========================================================================
+elif st.session_state.cislo_sceny == 4:
+    # Tlačidlo späť v bočnom menu pre Scénu 4
+    st.sidebar.button("Späť na úvod", use_container_width=True, on_click=preklop_na_uvod)
+        
+    col1, col2, col3 = st.columns(3)
+    
+    with col2:
+        st.markdown("<br><br>", unsafe_allow_html=True)
+        st.markdown("<h1 style='text-align: center;'>Básne</h1>", unsafe_allow_html=True)
+        
+        # --- SEM SI MÔŽETE NAPÍSAŤ SVOJ ČISTÝ TEXT ---
+        st.write("Tu je pre vás, milí voliči, nejaké povzbudenie pred voľbami:")
+        st.write("V tých voľbách demokratických 
+        je predsa čosi novô, 
+        a to je, že hlas národ má 
+        a vyvolený slovo. 
+ 
+        Pred dažďom rastú oblaky , 
+        pred voľbami zas sľuby, 
+        po daždi rastú rýdziky , 
+        po voľbách – prázdne huby. 
+ 
+        Pri voľbách národ vyberie 
+        si stranu milovanú, 
+        po voľbách strana milovaná 
+        ho odloží – na stranu. 
+ 
+        A pravda pravdou zostáva 
+        pod potmehúdskym slncom: 
+        voliči prídu ku urnám 
+        a vyvolený – k hrncom.")
+        st.write("Janko Jesenský,  17. júla 1929.")
