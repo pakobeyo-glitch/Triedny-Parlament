@@ -90,7 +90,7 @@ elif st.session_state.cislo_sceny == 2:
     # Tlačidlo späť v bočnom menu pre Scénu 2
     st.sidebar.button("Späť na úvod", use_container_width=True, on_click=preklop_na_uvod)
         
-    st.title("Hlasovanie a popularita strán")
+    st.title("Hlasovanie o návrhu")
     
     df_db = nacitat_data_z_sheets()
     
@@ -98,7 +98,7 @@ elif st.session_state.cislo_sceny == 2:
         celkovo_hlasov = df_db["Hlasy"].sum()
         df_db["Percentá (%)"] = df_db["Hlasy"].apply(lambda x: round((x / celkovo_hlasov) * 100, 2) if celkovo_hlasov > 0 else 0)
 
-        st.subheader("Priebežné výsledky popularity strán")
+        st.subheader("Priebežné výsledky")
         st.write("Stĺpcový prehľad:")
         st.bar_chart(df_db.set_index("Strana")["Percentá (%)"])
         
