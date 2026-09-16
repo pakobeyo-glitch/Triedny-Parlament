@@ -190,7 +190,6 @@ elif st.session_state.cislo_sceny == 3:
         uploaded_file = st.file_uploader(
         "Nahraj Word dokument",
         type=["docx"]
-        )
 
     if uploaded_file:
     document = Document(BytesIO(uploaded_file.read()))
