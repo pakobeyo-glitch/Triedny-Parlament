@@ -195,11 +195,11 @@ elif st.session_state.cislo_sceny == 3:
         if uploaded_file:
             document = Document(BytesIO(uploaded_file.read()))
 
-        text = "\n".join(
-            paragraph.text
-            for paragraph in document.paragraphs
-            if paragraph.text.strip()
-            )
+            text = "\n".join(
+                paragraph.text
+                for paragraph in document.paragraphs
+                if paragraph.text.strip()
+                )
             
         else:
             write("Ešte neboli zadané pravidlá.")
