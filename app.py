@@ -184,6 +184,8 @@ elif st.session_state.cislo_sceny == 3:
         st.sidebar.header("Sekcia pre správcu")
         heslo = st.sidebar.text_input("Zadajte správcovské", type="password")
 
+        uploaded_file = 
+
         if heslo == "admin123":
             st.sidebar.success("Prístup povolený!")
         
