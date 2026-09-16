@@ -193,7 +193,7 @@ elif st.session_state.cislo_sceny == 3:
         )
         
     if uploaded_file:
-    document = Document(BytesIO(uploaded_file.read()))
+        document = Document(BytesIO(uploaded_file.read()))
 
     text = "\n".join(
         paragraph.text
