@@ -180,29 +180,30 @@ elif st.session_state.cislo_sceny == 3:
         
         # --- Text ---
         # Sekcia pre správcu v bočnom paneli
-    st.sidebar.divider()
-    st.sidebar.header("Sekcia pre správcu")
-    heslo = st.sidebar.text_input("Zadajte správcovské", type="password")
+        st.sidebar.divider()
+        st.sidebar.header("Sekcia pre správcu")
+        heslo = st.sidebar.text_input("Zadajte správcovské", type="password")
 
-    if heslo == "admin123":
-        st.sidebar.success("Prístup povolený!")
+        if heslo == "admin123":
+            st.sidebar.success("Prístup povolený!")
         
-        uploaded_file = st.file_uploader(
-        "Nahraj Word dokument",
-        type=["docx"]
-        )
+            uploaded_file = st.file_uploader(
+            "Nahraj Word dokument",
+            type=["docx"]
+            )
         
-    if uploaded_file:
-        document = Document(BytesIO(uploaded_file.read()))
+        if uploaded_file:
+            document = Document(BytesIO(uploaded_file.read()))
 
         text = "\n".join(
             paragraph.text
             for paragraph in document.paragraphs
             if paragraph.text.strip()
-
-    else:
-        write("Ešte neboli zadané pravidlá.")
-    )
+            )
+            
+        else:
+            write("Ešte neboli zadané pravidlá.")
+    
 
     st.text_area("Vytiahnutý text", text, height=500)
     
