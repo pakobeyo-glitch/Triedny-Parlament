@@ -1,4 +1,6 @@
 import streamlit as st
+import docx import Document
+from io import BytesIO
 import pandas as pd
 import plotly.express as px
 
@@ -174,14 +176,33 @@ elif st.session_state.cislo_sceny == 3:
     
     with col2:
         st.markdown("<br><br>", unsafe_allow_html=True)
-        st.markdown("<h1 style='text-align: center;'>Pravidlá a informácie</h1>", unsafe_allow_html=True)
+        st.markdown("<h1 style='text-align: center;'>Informácie</h1>", unsafe_allow_html=True)
         
-        # --- SEM SI MÔŽETE NAPÍSAŤ SVOJ ČISTÝ TEXT ---
-        st.write("Tu sú základné informácie o našom parlamentnom prieskume:")
-        st.write("Každý môže voliť iba raz.")
-        st.write("Dobre si premyslite koho zvolíte. **Svoju voľbu už nemôžte zmeniť.**")
-        st.write("*Prajem vám, aby ste volili múdro a obozretne! Nech si dobre zvolíte!*")
+        # --- Text ---
+        # Sekcia pre správcu v bočnom paneli
+    st.sidebar.divider()
+    st.sidebar.header("Sekcia pre správcu")
+    heslo = st.sidebar.text_input("Zadajte správcovské", type="password")
 
+    if heslo == "admin123":
+        st.sidebar.success("Prístup povolený!")
+        
+        uploaded_file = st.file_uploader(
+        "Nahraj Word dokument",
+        type=["docx"]
+        )
+
+    if uploaded_file:
+    document = Document(BytesIO(uploaded_file.read()))
+
+    text = "\n".join(
+        paragraph.text
+        for paragraph in document.paragraphs
+        if paragraph.text.strip()
+    )
+
+    st.text_area("Vytiahnutý text", text, height=500)
+    
 # =========================================================================
 # SCÉNA 4: BÁSNE
 # =========================================================================
