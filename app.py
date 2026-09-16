@@ -199,6 +199,9 @@ elif st.session_state.cislo_sceny == 3:
             paragraph.text
             for paragraph in document.paragraphs
             if paragraph.text.strip()
+
+    else:
+        write("Ešte neboli zadané pravidlá.")
     )
 
     st.text_area("Vytiahnutý text", text, height=500)
