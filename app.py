@@ -178,18 +178,9 @@ elif st.session_state.cislo_sceny == 3:
     with col2:
         st.markdown("<br><br>", unsafe_allow_html=True)
         st.markdown("<h1 style='text-align: center;'>Informácie</h1>", unsafe_allow_html=True)
-        
-       # -------------------------
-    # NASTAVENIA
-    # -------------------------
 
     ADMIN_PASSWORD = "admin123"
     DATABASE = "documents.db"
-
-
-    # -------------------------
-    # DATABÁZA
-    # -------------------------
 
     def init_database():
         connection = sqlite3.connect(DATABASE)
@@ -258,8 +249,7 @@ elif st.session_state.cislo_sceny == 3:
         page_icon="📚"
     )
 
-    st.title("📚 Dokumenty")
-
+    st.title("Dokumenty")
 
     # -------------------------
     # SIDEBAR - ADMIN
@@ -267,7 +257,7 @@ elif st.session_state.cislo_sceny == 3:
 
     with st.sidebar:
 
-        st.header("🔐 Správca")
+        st.header("Správca")
 
         password = st.text_input(
             "Heslo",
@@ -293,7 +283,7 @@ elif st.session_state.cislo_sceny == 3:
 
         st.sidebar.divider()
 
-        st.sidebar.subheader("⚙️ Administrácia")
+        st.sidebar.subheader("Administrácia")
 
         uploaded_file = st.sidebar.file_uploader(
             "Pridať Word dokument",
@@ -302,7 +292,7 @@ elif st.session_state.cislo_sceny == 3:
 
         if uploaded_file is not None:
 
-            if st.sidebar.button("📤 Pridať dokument"):
+            if st.sidebar.button("Pridať dokument"):
 
                 document = Document(
                     BytesIO(uploaded_file.read())
@@ -335,7 +325,7 @@ elif st.session_state.cislo_sceny == 3:
 
     if not documents:
 
-        st.info("📭 Správca zatiaľ nič nepridal.")
+        st.info("Správca zatiaľ nič nepridal.")
 
     else:
 
@@ -343,7 +333,7 @@ elif st.session_state.cislo_sceny == 3:
 
         for document_id, filename, text in documents:
 
-            with st.expander(f"📄 {filename}"):
+            with st.expander(f"{filename}"):
 
                 st.text(text)
 
@@ -351,7 +341,7 @@ elif st.session_state.cislo_sceny == 3:
                 if st.session_state.get("admin", False):
 
                     if st.button(
-                        "🗑️ Vymazať",
+                        "Vymazať",
                         key=f"delete_{document_id}"
                     ):
 
