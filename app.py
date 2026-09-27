@@ -63,7 +63,7 @@ def nacitat_data_z_sheets():
 def nacitat_data_flasi():
     try:
         base_url = st.session_state.odkaz_na_flase.split("/edit")
-        csv_url_strany = f"{base_url[0]}/export?format=csv&gid=0"
+        csv_url_flasi = f"{base_url[0]}/export?format=csv&gid=0"
         df = pd.read_csv(csv_url_flasi)
         df.columns = ["Trieda", "Fľaše"] + list(df.columns[2:])
         df["Fľaše"] = pd.to_numeric(df["Fľaše"], errors='coerce').fillna(0)
