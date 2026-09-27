@@ -20,8 +20,11 @@ def preklop_na_grafy():
 def preklop_na_info():
     st.session_state.cislo_sceny = 3
 
-def preklop_na_basne():
+def preklop_na_flase():
     st.session_state.cislo_sceny = 4
+
+def preklop_na_basne():
+    st.session_state.cislo_sceny = 5
 
 # =========================================================================
 # ZÁKLADNÉ PREDVOLENÉ ODKAZY
@@ -69,7 +72,7 @@ if st.session_state.cislo_sceny == 1:
             <div style="text-align: center;">
                 <img src="{URL_LOGA}" width="180" style="margin-bottom: 20px; border-radius: 10px;">
                 <h1 style="margin-top: 0px;">Hlasovanie</h1>
-                <h3>Prieskum popularity strán a hlasovanie</h3>
+                <h3>Hlasovanie a iné funkcie pre Školský paarlament</h3>
                 <p style="font-size: 16px; color: #555; margin-bottom: 30px;">
                     Vítame vás v aplikácii. Vyberte si, kam chcete pokračovať:
                 </p>
@@ -82,10 +85,14 @@ if st.session_state.cislo_sceny == 1:
         st.button("POKRAČOVAŤ NA STRÁNKU", type="primary", use_container_width=True, on_click=preklop_na_grafy)
         
         st.markdown("<div style='margin-bottom: 10px;'></div>", unsafe_allow_html=True)
-        st.button("PRAVIDLÁ A INFORMÁCIE", type="secondary", use_container_width=True, on_click=preklop_na_info)
+        st.button("ZADANIA A INFORMÁCIE", type="secondary", use_container_width=True, on_click=preklop_na_info)
+
+        st.markdown("<div style='margin-bottom: 10px;'></div>", unsafe_allow_html=True)
+        st.button("POZRIEŤ STAV FĽAŠÍ", type="secondary", use_container_width=True, on_click=preklop_na_basne)
 
         st.markdown("<div style='margin-bottom: 10px;'></div>", unsafe_allow_html=True)
         st.button("BÁSEŇ", type="secondary", use_container_width=True, on_click=preklop_na_basne)
+        
 # =========================================================================
 # SCÉNA 2: HLAVNÁ OBRAZOVKA (Grafy, hlasovanie, správca)
 # =========================================================================
@@ -167,7 +174,7 @@ elif st.session_state.cislo_sceny == 2:
 
 
 # =========================================================================
-# SCÉNA 3: ČISTÁ TEXTOVÁ OBRAZOVKA (Informácie)
+# SCÉNA 3: INFORMÁCIE
 # =========================================================================
 elif st.session_state.cislo_sceny == 3:
     # Tlačidlo späť v bočnom menu pre Scénu 3
@@ -350,12 +357,37 @@ elif st.session_state.cislo_sceny == 3:
                         st.success("Dokument bol vymazaný.")
 
                         st.rerun()
-                    
+
 # =========================================================================
-# SCÉNA 4: BÁSNE
+# SCÉNA 4: FĽAšE
 # =========================================================================
 elif st.session_state.cislo_sceny == 4:
     # Tlačidlo späť v bočnom menu pre Scénu 4
+    st.sidebar.button("Späť na úvod", use_container_width=True, on_click=preklop_na_uvod)
+
+    st.title("Hlasovanie o návrhu")
+    
+    df_db = nacitat_data_z_sheets()
+    
+    if not df_db.empty:
+        celkovo_hlasov = df_db["Hlasy"].sum()
+        df_db["Percentá (%)"] = df_db["Hlasy"].apply(lambda x: round((x / celkovo_hlasov) * 100, 2) if celkovo_hlasov > 0 else 0)
+
+        st.subheader("Priebežné výsledky")
+        st.write("Stĺpcový prehľad:")
+        st.bar_chart(df_db.set_index("Strana")["Percentá (%)"])
+        
+        st.write("Podielový (koláčový) prehľad:")
+        fig = px.pie(df_db, values='Percentá (%)', names='Strana', color_discrete_sequence=px.colors.sequential.RdBu)
+        st.plotly_chart(fig, use_container_width=True)
+        
+        st.dataframe(df_db[["Strana", "Hlasy", "Percentá (%)"]], use_container_width=True, hide_index=True)
+
+# =========================================================================
+# SCÉNA 5: BÁSNE
+# =========================================================================
+elif st.session_state.cislo_sceny == 5:
+    # Tlačidlo späť v bočnom menu pre Scénu 5
     st.sidebar.button("Späť na úvod", use_container_width=True, on_click=preklop_na_uvod)
         
     col1, col2, col3 = st.columns(3)
