@@ -35,6 +35,9 @@ if "google_sheet_url" not in st.session_state:
 if "odkaz_na_formular" not in st.session_state:
     st.session_state.odkaz_na_formular = "https://docs.google.com/forms/d/e/1FAIpQLSdFRKTTneLhn0KpOZI-TJPyWR-6Qj5FWXjcImFznMErBtgHbg/viewform?usp=header"
 
+if "odkaz_na_flase" not in st.session_state:
+    st.session_state.odkaz_na_flase = "https://docs.google.com/spreadsheets/d/187M8UZcTUD7luK90Tsbyz8wkSwHkVhsSiHut3wCVTCI/edit?usp=sharing"
+
 if "hlasovanie_povolene" not in st.session_state:
     st.session_state.hlasovanie_povolene = True
 
@@ -51,6 +54,19 @@ def nacitat_data_z_sheets():
         df = pd.read_csv(csv_url_strany)
         df.columns = ["Návrh", "Hlasy"] + list(df.columns[2:])
         df["Hlasy"] = pd.to_numeric(df["Hlasy"], errors='coerce').fillna(0)
+        return df
+    except Exception as e:
+        st.error(f"Chyba pri načítaní dát z Google Tabuľky: {e}")
+        return pd.DataFrame()
+
+# Funkcia na bezpečné načítanie flaší
+def nacitat_data_flasi():
+    try:
+        base_url = st.session_state.odkaz_na_flase.split("/edit")
+        csv_url_strany = f"{base_url[0]}/export?format=csv&gid=0"
+        df = pd.read_csv(csv_url_flasi)
+        df.columns = ["Trieda", "Fľaše"] + list(df.columns[2:])
+        df["Fľaše"] = pd.to_numeric(df["Fľaše"], errors='coerce').fillna(0)
         return df
     except Exception as e:
         st.error(f"Chyba pri načítaní dát z Google Tabuľky: {e}")
@@ -253,7 +269,7 @@ elif st.session_state.cislo_sceny == 3:
 
     st.set_page_config(
         page_title="Dokumenty",
-        page_icon="📚"
+        page_icon="Doc"
     )
 
     st.title("Dokumenty")
@@ -365,23 +381,23 @@ elif st.session_state.cislo_sceny == 4:
     # Tlačidlo späť v bočnom menu pre Scénu 4
     st.sidebar.button("Späť na úvod", use_container_width=True, on_click=preklop_na_uvod)
 
-    st.title("Hlasovanie o návrhu")
+    st.title("Pozrieť si stav fľaší")
     
-    df_db = nacitat_data_z_sheets()
+    df_db = nacitat_data_flasi()
     
     if not df_db.empty:
-        celkovo_hlasov = df_db["Hlasy"].sum()
-        df_db["Percentá (%)"] = df_db["Hlasy"].apply(lambda x: round((x / celkovo_hlasov) * 100, 2) if celkovo_hlasov > 0 else 0)
+        celkovo_hlasov = df_db["Fľaše"].sum()
+        df_db["Percentá (%)"] = df_db["Fľaše"].apply(lambda x: round((x / celkovo_hlasov) * 100, 2) if celkovo_hlasov > 0 else 0)
 
         st.subheader("Priebežné výsledky")
         st.write("Stĺpcový prehľad:")
-        st.bar_chart(df_db.set_index("Strana")["Percentá (%)"])
+        st.bar_chart(df_db.set_index("Trieda")["Percentá (%)"])
         
         st.write("Podielový (koláčový) prehľad:")
-        fig = px.pie(df_db, values='Percentá (%)', names='Strana', color_discrete_sequence=px.colors.sequential.RdBu)
+        fig = px.pie(df_db, values='Percentá (%)', names='Fľaše', color_discrete_sequence=px.colors.sequential.RdBu)
         st.plotly_chart(fig, use_container_width=True)
         
-        st.dataframe(df_db[["Strana", "Hlasy", "Percentá (%)"]], use_container_width=True, hide_index=True)
+        st.dataframe(df_db[["Trieda", "Fľaše", "Percentá (%)"]], use_container_width=True, hide_index=True)
 
 # =========================================================================
 # SCÉNA 5: BÁSNE
