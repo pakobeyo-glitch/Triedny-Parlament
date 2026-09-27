@@ -88,7 +88,7 @@ if st.session_state.cislo_sceny == 1:
         st.button("ZADANIA A INFORMÁCIE", type="secondary", use_container_width=True, on_click=preklop_na_info)
 
         st.markdown("<div style='margin-bottom: 10px;'></div>", unsafe_allow_html=True)
-        st.button("POZRIEŤ STAV FĽAŠÍ", type="secondary", use_container_width=True, on_click=preklop_na_basne)
+        st.button("POZRIEŤ STAV FĽAŠÍ", type="secondary", use_container_width=True, on_click=def preklop_na_flase)
 
         st.markdown("<div style='margin-bottom: 10px;'></div>", unsafe_allow_html=True)
         st.button("BÁSEŇ", type="secondary", use_container_width=True, on_click=preklop_na_basne)
