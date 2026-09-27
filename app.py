@@ -49,7 +49,7 @@ def nacitat_data_z_sheets():
         base_url = st.session_state.google_sheet_url.split("/edit")
         csv_url_strany = f"{base_url[0]}/export?format=csv&gid=0"
         df = pd.read_csv(csv_url_strany)
-        df.columns = ["Strana", "Hlasy"] + list(df.columns[2:])
+        df.columns = ["Návrh", "Hlasy"] + list(df.columns[2:])
         df["Hlasy"] = pd.to_numeric(df["Hlasy"], errors='coerce').fillna(0)
         return df
     except Exception as e:
@@ -110,13 +110,13 @@ elif st.session_state.cislo_sceny == 2:
 
         st.subheader("Priebežné výsledky")
         st.write("Stĺpcový prehľad:")
-        st.bar_chart(df_db.set_index("Strana")["Percentá (%)"])
+        st.bar_chart(df_db.set_index("Návrh")["Percentá (%)"])
         
         st.write("Podielový (koláčový) prehľad:")
-        fig = px.pie(df_db, values='Percentá (%)', names='Strana', color_discrete_sequence=px.colors.sequential.RdBu)
+        fig = px.pie(df_db, values='Percentá (%)', names='Návrh', color_discrete_sequence=px.colors.sequential.RdBu)
         st.plotly_chart(fig, use_container_width=True)
         
-        st.dataframe(df_db[["Strana", "Hlasy", "Percentá (%)"]], use_container_width=True, hide_index=True)
+        st.dataframe(df_db[["Strana", "Návrh", "Percentá (%)"]], use_container_width=True, hide_index=True)
 
     st.divider()
     st.subheader("Odovzdanie vášho hlasu")
