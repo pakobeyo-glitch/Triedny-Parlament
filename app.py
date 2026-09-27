@@ -391,7 +391,8 @@ elif st.session_state.cislo_sceny == 4:
 
         st.subheader("Priebežné výsledky")
         st.write("Stĺpcový prehľad:")
-        st.bar_chart(df_db.set_index("Trieda")["Percentá (%)"])
+        fig = px.bar(df_db, values='Percentá (%)', names='Fľaše', color_discrete_sequence=px.colors.sequential.RdBu)
+        st.plotly_chart(fig, use_container_width=True)
         
         st.write("Podielový (koláčový) prehľad:")
         fig = px.pie(df_db, values='Percentá (%)', names='Fľaše', color_discrete_sequence=px.colors.sequential.RdBu)
