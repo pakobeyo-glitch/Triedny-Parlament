@@ -110,7 +110,7 @@ elif st.session_state.cislo_sceny == 2:
 
         st.subheader("Priebežné výsledky")
         st.write("Stĺpcový prehľad:")
-        st.bar_chart(df_db.set_index("Návrh")["Percentá (%)"])
+        st.bar_chart(df_db.set_index("Strana")["Percentá (%)"])
         
         st.write("Podielový (koláčový) prehľad:")
         fig = px.pie(df_db, values='Percentá (%)', names='Návrh', color_discrete_sequence=px.colors.sequential.RdBu)
